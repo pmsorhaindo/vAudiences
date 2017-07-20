@@ -1,0 +1,4 @@
+{
+  "browserScripts": [],
+  "app": "src/bundle.js"
+}

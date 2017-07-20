@@ -1,0 +1,109 @@
+/* Vizia contains its own CSS and themes, so this CSS is almost entirely functional */
+@keyframes carocycler {
+  0% {
+    transform: rotateY(0deg);
+  }
+  10% {
+    transform: rotateY(36deg);
+  }
+  20% {
+    transform: rotateY(72deg);
+  }
+  30% {
+    transform: rotateY(108deg);
+  }
+  40% {
+    transform: rotateY(144deg);
+  }
+  50% {
+    transform: rotateY(180deg);
+  }
+  60% {
+    transform: rotateY(216deg);
+  }
+  70% {
+    transform: rotateY(252deg);
+  }
+  80% {
+    transform: rotateY(288deg);
+  }
+  90% {
+    transform: rotateY(324deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+
+div.carousel-wrapper {
+  margin: 50px auto 0;
+  width: 250px;
+  height: 200px;
+  position: relative;
+  perspective: 1200px;
+}
+
+figure.spinner {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+  animation: carocycler 20s infinite;
+}
+
+figure.spinner img {
+  display:none;
+  width: 250px;
+  position: absolute;
+  border-radius: 5px;
+}
+
+figure.spinner img:nth-child(1) {
+  display: block;
+  transform: rotateY(0deg) translateZ(450px);
+}
+figure.spinner img:nth-child(2) {
+  display: block;
+  transform: rotateY(-36deg) translateZ(450px);
+}
+figure.spinner img:nth-child(3) {
+  display: block;
+  transform: rotateY(-72deg) translateZ(450px);
+}
+figure.spinner img:nth-child(4) {
+  display: block;
+  transform: rotateY(-108deg) translateZ(450px);
+}
+figure.spinner img:nth-child(5) {
+  display: block;
+  transform: rotateY(-144deg) translateZ(450px);
+}
+figure.spinner img:nth-child(6) {
+  display: block;
+  transform: rotateY(-180deg) translateZ(450px);
+}
+figure.spinner img:nth-child(7) {
+  display: block;
+  transform: rotateY(-216deg) translateZ(450px);
+}
+figure.spinner img:nth-child(8) {
+  display: block;
+  transform: rotateY(-252deg) translateZ(450px);
+}
+figure.spinner img:nth-child(9) {
+  display: block;
+  transform: rotateY(-288deg) translateZ(450px);
+}
+figure.spinner img:nth-child(10) {
+  display: block;
+  transform: rotateY(-324deg) translateZ(450px);
+}
+
+a.gallerylink:nth-of-type( 1 ) {
+  float: left;
+}
+a.gallerylink:nth-of-type( 2 ) {
+  float: right;
+}
+

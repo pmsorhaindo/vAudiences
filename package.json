@@ -1,0 +1,35 @@
+{
+  "name": "vaudiences",
+  "version": "1.0.0",
+  "description": "audiences in vizia",
+  "main": "bundle.js",
+  "scripts": {
+    "build": "browserify -e ./src/bundle.js -s bundle -o ./dist/build.js",
+    "start": "wzrd demo.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "mikey",
+  "license": "ISC",
+  "devDependencies": {
+    "browserify": "^13.3.0",
+    "wzrd": "^1.5.0"
+  },
+  "dependencies": {
+    "@vizia/v4d": "github:vizia/v4d",
+    "browserify-css": "^0.9.2",
+    "cors-anywhere": "^0.4.0",
+    "handlebars": "^4.0.6",
+    "hbsfy": "^2.7.0",
+    "nonce": "^1.0.4",
+    "oauth-percent-encode": "^0.1.2",
+    "oauth-sign": "^0.8.2",
+    "vizia": "github:brandwatchltd/vizia",
+    "vizia-css": "github:vizia/vizia-css"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-css",
+      "hbsfy"
+    ]
+  }
+}
