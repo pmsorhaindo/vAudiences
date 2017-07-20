@@ -1,6 +1,7 @@
 const nonce = require('nonce')();
 const crypto = require('crypto');
 const percentEncode = require('oauth-percent-encode');
+const oauthSign = require('oauth-sign');
 
 module.exports = function() {
 
@@ -31,6 +32,8 @@ module.exports = function() {
     return `${encodedKey}=${encodedValue}`;
   }).join('&');
 
+  const signed2 = oauthSign.sign(audiences.ta['oauth_signature_method'], audiences.httpMethod, audiences.baseURL, [['id'],['13911']], 'Ht4VhGRv9AXO9Hi6O6NAjypx2nuvUGNu7UBKBZjJRY', '3VtZqIy562a1woTLZSRIzDzez9Znfudw3MBEqZezpmwkj');
+
   console.log("paramString", paramString, paramString === 'include_entities=true&oauth_consumer_key=xvz1evFS4wEEPTGEFPHBog&oauth_nonce=kYjzVBB8Y0ZFabxSWbWovY3uYSQ2pTgmZeNu2VS4cg&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1318622958&oauth_token=370773112-GmHxMAgYyLbNEtIKZeRNFsMKPR9EyMZeS9weJAEb&oauth_version=1.0&status=Hello%20Ladies%20%2B%20Gentlemen%2C%20a%20signed%20OAuth%20request%21');
 
   const signatureBaseString = `${audiences.httpMethod}&${percentEncode(audiences.baseURL)}&${percentEncode(paramString)}`;
@@ -41,9 +44,9 @@ module.exports = function() {
   
   console.log('signingString', signingString, signingString === 'kAcSOqF21Fu85e7zjz7ZN2U4ZRhfV3WpwPAoE3Z7kBw&LswwdoUaIvS8ltyTt5jkRh4J50vUPVVHtR2YPi5kE');
 
-  audiences.ta['oauth_signature'] = crypto.createHmac('sha1', signingString)
+  audiences.ta['oauth_signature'] = signed2; /*crypto.createHmac('sha1', signingString)
     .update(signatureBaseString)
-    .digest('base64');
+    .digest('base64');*/
 
   console.log('hash', audiences.ta['oauth_signature']);
 
