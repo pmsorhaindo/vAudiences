@@ -21,8 +21,9 @@
     "handlebars": "^4.0.6",
     "hbsfy": "^2.7.0",
     "nonce": "^1.0.4",
-    "oauth-percent-encode": "^0.1.2",
     "oauth": "^0.9.15",
+    "oauth-1.0a": "^2.2.0",
+    "oauth-percent-encode": "^0.1.2",
     "vizia": "github:brandwatchltd/vizia",
     "vizia-css": "github:vizia/vizia-css"
   },

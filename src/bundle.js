@@ -14,7 +14,7 @@ const rocks = [
 ];
 
 bundle.set("key", "dc6zaTOxFJmzC")
-  .set("query", "pizza cat")
+  .set("query", "kanye")
   .setThrottle(2000)
 
   .use(gifs())
