@@ -1,60 +1,32 @@
-const http = require('http');
 const OAuth = require('oauth-1.0a');
 const request = require('request');
 const crypto = require('crypto');
-const express = require('express');
-const twitterProxyMiddleware = require('./twitterProxyMiddleware');
+const twitterAPI = require('node-twitter-api');
 
 module.exports = function() {
 
-  const app = express();
+  let reqToken;
+  let reqTokenSecret;
+  const twitter = new twitterAPI({
+    consumerKey: 'Ix0Out5G4kM6WS9945HoILZeh',
+    consumerSecret: 'QtkqegUaKfbicCijbirLCudUKlQPGg3Xg949zAUu0s2uHZdYna',
+    callback: 'http://yoururl.tld/something'
+  });
 
-  app.get('/home', (req, res) => res.redirect('/'));
-  app.use('/twitter', twitterProxyMiddleware);
-  
+  twitter.getRequestToken(function(error, requestToken, requestTokenSecret, results){
+    if (error) {
+      console.log("Error getting OAuth request token : " + error);
+    } else {
+      //store token and tokenSecret somewhere, you'll need them later; redirect user 
+      reqToken = requestToken
+      reqTokenSecret = requestTokenSecret
+      console.log("value", reqToken, reqTokenSecret);
+    }
+  });
+
   const audiences = {
     offset: 0
   };
-
-  const oauth = OAuth({
-    consumer: {
-      key: 'Ix0Out5G4kM6WS9945HoILZeh',
-      secret: 'QtkqegUaKfbicCijbirLCudUKlQPGg3Xg949zAUu0s2uHZdYna'
-    },
-    signature_method: 'HMAC-SHA1',
-    hash_function: function(base_string, key) {
-      return crypto.createHmac('sha1', key).update(base_string).digest('base64');
-    }
-  });
-  
-  const request_data = {
-    url: 'https://api.twitter.com/1.1/trends/place.json?id=1',
-    method: 'GET',
-    data: {
-      id: '1',
-    },
-  };
-
-  const token = {
-    key: '39724345-e3zwlySYfa3hj8loixfefLfCAUVQBgnMT7sUZfMuE',
-    secret: '3ftlDQwqpNObutHuecv292UgqPjKHolth4Ua7VxduUBoL',
-  };
-  
-  http.createServer(function (req, resp) {
-    if (req.url === '/doodle.png') {
-      request.get('http://google.com').pipe(resp)
-    }
-  }).listen(8081);
-
-  request({
-    url: request_data.url,
-    method: request_data.method,
-    form: request_data.data,
-    headers: oauth.toHeader(oauth.authorize(request_data, token))
-  }, function(error, response, body) {
-    //process your data here 
-    console.log("value", body, error);
-  });
 
   audiences.source = function(v4d) {
     const config = v4d.config,
